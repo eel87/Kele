@@ -9,8 +9,8 @@ class Kele
   def initialize(email, password)
     options = {query: { email: email, password: password } }
     @base_url = 'https://www.bloc.io/api/v1'
-    response = self.class.post(@base_url + '/sessions', options)
-    @auth_token = response["auth_token"]
+    response = self.class.post(@base_url + '/sessions', options) 
+    @auth_token = response['auth_token']
     if @auth_token.nil?
       puts "Sorry, you have entered invalid credentials. Please try again"
     end
