@@ -5,8 +5,9 @@ class Kele
   include HTTParty
   
   attr_accessor :base_url
+  
   def initialize(email, password)
-    options = { body: { email: email, password: password } }
+    options = {query: { email: email, password: password } }
     @base_url = 'https://www.bloc.io/api/v1'
     response = self.class.post(@base_url + '/sessions', options)
     @auth_token = response["auth_token"]
