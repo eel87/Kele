@@ -15,4 +15,9 @@ class Kele
       puts "Sorry, you have entered invalid credentials. Please try again"
     end
   end
+  
+  def get_me
+    response = self.class.get(@base_url + '/users/me', headers: {"authorization" => @auth_token})
+    JSON.parse(response.body)
+  end
 end
