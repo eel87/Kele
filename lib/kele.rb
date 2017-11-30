@@ -46,7 +46,7 @@ class Kele
               "message" => message
       }
     }
-    response = self.class.get(@base_url + "/messages/", values)
+    response = self.class.get(@base_url + "/messages", values)
     JSON.parse(response.body)
   end
 end
