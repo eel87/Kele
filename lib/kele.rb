@@ -27,4 +27,26 @@ class Kele
     response = self.class.get(@base_url + "/mentors/#{mentor_id}/student_availability", headers: {"authorization" => @auth_token})
     JSON.parse(response.body)
   end
+  
+  def get_messages(page = nil)
+    values = {
+      headers: {"authorization" => @auth_token },
+      body: {"page" => page}
+    }
+    response = self.class.get(@base_url + "/message_threads/", values)
+    JSON.parse(response.body)
+  end
+  
+  def create_message(sender_email, recipient_id, subject, message)
+    values = {
+      headers: {"authorization" => @auth_token},
+      body: { "sender_email" => sender_email,
+              "recipient_id" => recipient_id,
+              "subject" => subject,
+              "message" => message
+      }
+    }
+    response = self.class.get(@base_url + "/messages/", values)
+    JSON.parse(response.body)
+  end
 end
