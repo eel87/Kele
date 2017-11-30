@@ -28,7 +28,7 @@ class Kele
     JSON.parse(response.body)
   end
   
-  def get_messages(page = nil)
+  def get_messages(page = 1)
     values = {
       headers: {"authorization" => @auth_token },
       body: {"page" => page}
@@ -40,13 +40,13 @@ class Kele
   def create_message(sender_email, recipient_id, subject, message)
     values = {
       headers: {"authorization" => @auth_token},
-      body: { "sender_email" => sender_email,
+      body: { "sender" => sender_email,
               "recipient_id" => recipient_id,
               "subject" => subject,
-              "message" => message
+              "stripped-text" => message
       }
     }
-    response = self.class.get(@base_url + "/messages", values)
-    JSON.parse(response.body)
+    response = self.class.post(@base_url + "/messages", values)
+    puts response.body
   end
 end
